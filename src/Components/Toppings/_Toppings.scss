@@ -1,0 +1,43 @@
+.builder_toppings {
+    display: flex;
+    // flex-direction: column;
+
+    & > *{
+        margin: 1em;
+    }
+
+    &_topping {
+        display: flex;
+        flex-direction: column;
+
+        &_btn {
+            position: relative;
+            z-index: 2;
+        }
+
+        &_layout{
+            position: relative;
+            z-index: 1;
+            margin: 0 auto;
+            width: 70%;
+            fill: blue;
+
+            &_btn * {
+                pointer-events: none; 
+                
+            }
+            
+            & :first-child {
+            border-bottom-left-radius: 0.5em;
+            }
+
+            & :last-child {
+                border-bottom-right-radius: 0.5em;
+            }
+        }
+    }
+}
+
+// .builder_toppings > *{
+//     margin: 2em;
+// }

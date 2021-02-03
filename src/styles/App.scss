@@ -1,0 +1,21 @@
+@import './scss/themes';
+
+
+
+*{
+    font-family: $font-primary;
+}
+
+@import '../Components/Header/Header';
+@import '../Components/Footer/Footer';
+@import '../Components/Builder/Builder';
+@import '../Components/Home/Home';
+@import '../Components/Base/Base';
+@import '../Components/Sauce/Sauce';
+@import '../Components/Cheese/Cheese';
+@import '../Components/Toppings/Toppings';
+@import '../Components/Veggies/Veggies';
+@import '../Components/Base/Base';
+@import '../Components/BuilderPizza/BuilderPizza';
+
+@import './scss/buttons';

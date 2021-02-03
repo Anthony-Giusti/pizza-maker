@@ -1,0 +1,14 @@
+.header {
+    background-color: $primary-color;
+    display: flex;
+
+    img {
+        height: 7em;
+    }
+
+    h1{
+        font-family: $font-title;
+        margin: auto;
+        font-size: 5em;
+    }
+}

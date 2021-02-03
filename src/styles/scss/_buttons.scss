@@ -1,0 +1,44 @@
+%btn {
+    display: inline-block;
+    border-radius: 3em;
+    padding: 0.8em 2em;
+    margin: 0.4em 0.2em;
+}
+
+.btn-primary {
+    @extend %btn;
+    color: white;
+    background-color: $secondary-color;
+    border: 0.2em $primary-color solid;
+    text-shadow: 1px 1px black;
+    transition: all .2s ease-in-out;
+
+    &:hover {
+        border-color:rgb(255, 255, 255);
+        transform: scale(1.1);
+    }
+
+    &:focus {
+        border-color:rgb(255, 255, 255);
+        transform: scale(1.1);
+    }
+}
+
+.btn-primary-selected {
+    border: 0.2em white solid;
+}
+
+.btn-secondary {
+    // @extend %btn;
+    background-color: $secondary-color !important;
+    border-left: 0.2em solid white  !important;
+    border-right: 0.2em solid white  !important;
+    border-bottom: 0.2em solid white  !important;
+    width: 30%;
+    height: 2em;
+    border: none;
+}
+
+.btnSelected {
+    background-color: rgb(255,255,255) !important;
+}
