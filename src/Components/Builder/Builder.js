@@ -1,6 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter as Switch, Route, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { AnimatePresence } from 'framer-motion';
 
 import BuilderNav from '../BuilderNav/BuilderNav';
 import BuilderPizza from '../BuilderPizza/BuilderPizza';
@@ -11,6 +12,7 @@ import Toppings from '../Toppings/Toppings';
 
 const Builder = ({
   pizza,
+  startBuilding,
   setPizzaStyle,
   setPizzaSize,
   setPizzaCheese,
@@ -18,52 +20,44 @@ const Builder = ({
   setPizzaToppings,
   setPizzaToppingLayout,
   setPizzaToppingUI,
-  formatName,
-  formatSize,
-}) => (
-  <section className="builder">
-    <Router>
+}) => {
+  const location = useLocation();
+
+  return (
+    <section className="builder">
       <BuilderNav />
+
       <section className="builder_interface">
-        <Switch>
-          <Route path="/" exact component={Home}>
-            <Home />
-          </Route>
-          <Route path="/base" component={Base}>
-            <Base
-              pizza={pizza}
-              setPizzaSize={setPizzaSize}
-              setPizzaStyle={setPizzaStyle}
-              formatName={formatName}
-              formatSize={formatSize}
-            />
-          </Route>
-          <Route path="/sauce" component={Sauce}>
-            <Sauce
-              setPizzaSauce={setPizzaSauce}
-              setPizzaCheese={setPizzaCheese}
-              formatName={formatName}
-              pizza={pizza}
-            />
-          </Route>
-          <Route path="/protein" component={Toppings}>
-            <Toppings
-              setPizzaToppings={setPizzaToppings}
-              setPizzaToppingLayout={setPizzaToppingLayout}
-              setPizzaToppingUI={setPizzaToppingUI}
-              formatName={formatName}
-              pizza={pizza}
-            />
-          </Route>
-        </Switch>
+        <AnimatePresence exitBeforeEnter>
+          <Switch location={location} key={location.key}>
+            <Route path="/" exact comp={Home}>
+              <Home startBuilding={startBuilding} />
+            </Route>
+            <Route path="/base" comp={Base}>
+              <Base pizza={pizza} setPizzaSize={setPizzaSize} setPizzaStyle={setPizzaStyle} />
+            </Route>
+            <Route path="/sauce" comp={Sauce}>
+              <Sauce setPizzaSauce={setPizzaSauce} setPizzaCheese={setPizzaCheese} pizza={pizza} />
+            </Route>
+            <Route path="/toppings" comp={Toppings}>
+              <Toppings
+                setPizzaToppings={setPizzaToppings}
+                setPizzaToppingLayout={setPizzaToppingLayout}
+                setPizzaToppingUI={setPizzaToppingUI}
+                pizza={pizza}
+              />
+            </Route>
+          </Switch>
+        </AnimatePresence>
         <BuilderPizza pizza={pizza} />
       </section>
-    </Router>
-  </section>
-);
+    </section>
+  );
+};
 
 Builder.propTypes = {
   pizza: PropTypes.object.isRequired,
+  startBuilding: PropTypes.func.isRequired,
   setPizzaStyle: PropTypes.func.isRequired,
   setPizzaSauce: PropTypes.func.isRequired,
   setPizzaSize: PropTypes.func.isRequired,
@@ -71,8 +65,6 @@ Builder.propTypes = {
   setPizzaToppings: PropTypes.func.isRequired,
   setPizzaToppingLayout: PropTypes.func.isRequired,
   setPizzaToppingUI: PropTypes.func.isRequired,
-  formatName: PropTypes.func.isRequired,
-  formatSize: PropTypes.func.isRequired,
 };
 
 export default Builder;

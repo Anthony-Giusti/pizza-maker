@@ -1,25 +1,22 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
 
 import Header from './Components/Header/Header';
 import Builder from './Components/Builder/Builder';
 import Footer from './Components/Footer/Footer';
 
 import {
-  pizzaSizes,
-  pizzaStyles,
+  pizzaSizesData,
+  pizzaStylesData,
   pizzaSaucesData,
   pizzaCheesesData,
   pizzaToppingsData,
-  pizzaBase,
 } from './Data/pizzaData';
 
 import './styles/reset.css';
 import './styles/App.css';
+// import { element } from 'prop-types';
 
 function App() {
-  // const location = useLocation();
   const [pizza, setPizza] = useState({
     size: null,
     style: null,
@@ -27,64 +24,68 @@ function App() {
     cheese: null,
     toppings: [],
   });
-  const [navSelection, setNavSelection] = useState();
+  const [buildStarted, setBuildStarted] = useState(false);
+  const [navLocation, setNavLocation] = useState();
 
-  const switchNavSelection = (location) => {
+  const switchNavLocation = (location) => {
     let x = location.pathname.substring(1);
     if (x === '') {
       x = 'home';
     }
-    setNavSelection(x);
+    setNavLocation(x);
   };
 
-  const formatSize = (size) => size.toLowerCase().split(' (')[0];
-  const formatName = (name) => name[0].toLowerCase() + name.slice(1).replace(/\s+/g, '');
+  const startBuilding = () => setBuildStarted(true);
 
-  const setPizzaStyle = (style) => setPizza({ ...pizza, style: style.target.id.split('-')[0] });
-  const setPizzaSize = (size) => setPizza({ ...pizza, size: size.target.id.split('-')[0] });
-
-  const setPizzaSauce = (sauce) => {
-    const newSauce = sauce.target.id.split('-')[0];
-    let img;
-
-    for (let i = 0; i < pizzaSaucesData.length; i += 1) {
-      if (pizzaSaucesData[i].id === newSauce) {
-        img = pizzaSaucesData[i].img;
-        break;
+  const findId = (element, id) => {
+    for (let i = 0; i < element.length; i += 1) {
+      if (element[i].id === id) {
+        return element[i];
       }
     }
-    setPizza({ ...pizza, sauce: { sauce: newSauce, img } });
   };
 
-  const setPizzaCheese = (cheese) => {
-    const newCheese = cheese.target.id.split('-')[0];
-    let img;
+  const setPizzaStyle = (e) => {
+    const newStyleId = e.target.id.split('-')[0];
+    const style = findId(pizzaStylesData, newStyleId);
+    setPizza({ ...pizza, style: { name: style.name, id: newStyleId } });
+  };
+  const setPizzaSize = (e) => {
+    const newSizeId = e.target.id.split('-')[0];
+    const size = findId(pizzaSizesData, newSizeId);
+    setPizza({ ...pizza, size: { name: size.name, id: newSizeId } });
+  };
 
-    for (let i = 0; i < pizzaCheesesData.length; i += 1) {
-      if (pizzaCheesesData[i].id === newCheese) {
-        img = pizzaCheesesData[i].img;
-        break;
-      }
-    }
-    setPizza({ ...pizza, cheese: { cheese: newCheese, img } });
+  const setPizzaSauce = (e) => {
+    const newSauceId = e.target.id.split('-')[0];
+    const sauce = findId(pizzaSaucesData, newSauceId);
+    setPizza({ ...pizza, sauce: { name: sauce.name, id: newSauceId, img: sauce.img } });
+  };
+
+  const setPizzaCheese = (e) => {
+    const newCheeseId = e.target.id.split('-')[0];
+    const cheese = findId(pizzaCheesesData, newCheeseId);
+    setPizza({ ...pizza, cheese: { name: cheese.name, id: newCheeseId, img: cheese.img } });
   };
 
   const setPizzaToppings = (e) => {
-    const newTopping = e.target.id.split('-')[0];
+    const newToppingId = e.target.id.split('-')[0];
     let newToppings;
-    let img;
 
-    for (let i = 0; i < pizzaToppingsData.length; i += 1) {
-      if (pizzaToppingsData[i].id === newTopping) {
-        img = pizzaToppingsData[i].img.full;
-        break;
-      }
-    }
-
-    if (pizza.toppings.every((element) => element.topping !== newTopping)) {
-      newToppings = [...pizza.toppings, { topping: newTopping, layout: 'full', img }];
+    if (pizza.toppings.every((element) => element.id !== newToppingId)) {
+      const topping = findId(pizzaToppingsData, newToppingId);
+      newToppings = [
+        ...pizza.toppings,
+        {
+          name: topping.name,
+          id: newToppingId,
+          layout: 'full',
+          type: topping.type,
+          img: topping.img.full,
+        },
+      ];
     } else {
-      newToppings = pizza.toppings.filter((element) => element.topping !== newTopping);
+      newToppings = pizza.toppings.filter((element) => element.id !== newToppingId);
     }
     setPizza({ ...pizza, toppings: newToppings });
   };
@@ -98,18 +99,17 @@ function App() {
   };
 
   const setPizzaToppingLayout = (e) => {
-    const [topping, layout] = e.target.id.split('-');
-    const newToppings = pizza.toppings.filter((element) => element.topping !== topping);
-    let img;
+    const [toppingId, layout] = e.target.id.split('-');
+    const newToppings = pizza.toppings.filter((element) => element.id !== toppingId);
+    const topping = findId(pizzaToppingsData, toppingId);
 
-    for (let i = 0; i < pizzaToppingsData.length; i += 1) {
-      if (pizzaToppingsData[i].id === topping) {
-        img = pizzaToppingsData[i].img[layout];
-        break;
-      }
-    }
-
-    newToppings.push({ topping, layout, img });
+    newToppings.push({
+      name: topping.name,
+      id: toppingId,
+      type: topping.type,
+      layout,
+      img: topping.img[layout],
+    });
     setPizza({ ...pizza, toppings: newToppings });
 
     setPizzaToppingUI(e.target);
@@ -119,7 +119,11 @@ function App() {
     <div className="App">
       <Header />
       <Builder
+        switchNavLocation={switchNavLocation}
+        navLocation={navLocation}
         pizza={pizza}
+        buildStarted={buildStarted}
+        startBuilding={startBuilding}
         setPizzaStyle={setPizzaStyle}
         setPizzaSize={setPizzaSize}
         setPizzaSauce={setPizzaSauce}
@@ -127,8 +131,6 @@ function App() {
         setPizzaToppings={setPizzaToppings}
         setPizzaToppingLayout={setPizzaToppingLayout}
         setPizzaToppingUI={setPizzaToppingUI}
-        formatName={formatName}
-        formatSize={formatSize}
       />
       <Footer />
     </div>

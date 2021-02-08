@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 import { pizzaSaucesData, pizzaCheesesData } from '../../Data/pizzaData';
+import { pizzaOptionsVariants, primaryBtnVariants } from '../../Data/animations';
 
-import primaryBtnVariants from '../../Data/animations';
-
-const Sauce = ({ setPizzaSauce, setPizzaCheese, formatName, pizza }) => {
+const Sauce = ({ setPizzaSauce, setPizzaCheese, pizza }) => {
   const handleClick = (e) => {
     const { target } = e;
     const { children } = target.parentNode;
@@ -17,7 +17,6 @@ const Sauce = ({ setPizzaSauce, setPizzaCheese, formatName, pizza }) => {
     }
 
     for (let i = 0; i < children.length; i += 1) {
-      console.log(children[i]);
       children[i].classList.remove('btn-primary-selected');
     }
     target.classList.add('btn-primary-selected');
@@ -25,60 +24,75 @@ const Sauce = ({ setPizzaSauce, setPizzaCheese, formatName, pizza }) => {
 
   useEffect(() => {
     if (pizza.sauce) {
-      document.getElementById(`${pizza.sauce.sauce}-Btn`).classList.add('btn-primary-selected');
+      document.getElementById(`${pizza.sauce.id}-Btn`).classList.add('btn-primary-selected');
     }
     if (pizza.cheese) {
-      document.getElementById(`${pizza.cheese.cheese}-Btn`).classList.add('btn-primary-selected');
+      document.getElementById(`${pizza.cheese.id}-Btn`).classList.add('btn-primary-selected');
     }
   });
 
   return (
-    <section className="sauce buildOption">
+    <motion.section
+      className="sauce buildOption"
+      variants={pizzaOptionsVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <h2>PICK YOUR SAUCE</h2>
       <span className="builder_sauces">
-        {pizzaSaucesData.map((sauce) => {
-          const formattedName = formatName(sauce.name);
-          return (
-            <motion.button
-              variants={primaryBtnVariants}
-              // whileHover="whileHover"
-              // whileFocus="whileFocus"
-              type="button"
-              className="builder_sauces_btn btn-primary"
-              id={`${formattedName}-Btn`}
-              onClick={handleClick}
-            >
-              {sauce.name}
-            </motion.button>
-          );
-        })}
+        {pizzaSaucesData.map((sauce) => (
+          <motion.button
+            variants={primaryBtnVariants}
+            type="button"
+            className="builder_sauces_btn btn-primary"
+            id={`${sauce.id}-Btn`}
+            key={sauce.id}
+            onClick={handleClick}
+          >
+            {sauce.name}
+          </motion.button>
+        ))}
       </span>
       <h2>PICK YOUR CHEESE</h2>
       <span className="builder_cheeses">
-        {pizzaCheesesData.map((cheese) => {
-          const formattedName = formatName(cheese.name);
-          return (
-            <motion.button
-              variants={primaryBtnVariants}
-              type="button"
-              className="builder_sizes_btn btn-primary"
-              id={`${formattedName}-Btn`}
-              onClick={handleClick}
-            >
-              {cheese.name}
-            </motion.button>
-          );
-        })}
+        {pizzaCheesesData.map((cheese) => (
+          <motion.button
+            variants={primaryBtnVariants}
+            type="button"
+            className="builder_sizes_btn btn-primary"
+            id={`${cheese.id}-Btn`}
+            key={cheese.id}
+            onClick={handleClick}
+          >
+            {cheese.name}
+          </motion.button>
+        ))}
       </span>
-    </section>
+      {pizza.sauce && pizza.cheese && (
+        <span className="builder_continue">
+          <Link to="/Toppings">
+            <motion.button
+              type="button"
+              className="builder_styles_btn btn-primary"
+              variants={pizzaOptionsVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+            >
+              Continue
+            </motion.button>
+          </Link>
+        </span>
+      )}
+    </motion.section>
   );
 };
 
 Sauce.propTypes = {
-  formatName: PropTypes.func.isRequired,
   setPizzaSauce: PropTypes.func.isRequired,
   setPizzaCheese: PropTypes.func.isRequired,
-  pizza: PropTypes.func.isRequired,
+  pizza: PropTypes.object.isRequired,
 };
 
 export default Sauce;

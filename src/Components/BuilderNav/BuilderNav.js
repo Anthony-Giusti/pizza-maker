@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const BuilderNav = () => (
   <section className="builder_nav">
@@ -9,7 +9,7 @@ const BuilderNav = () => (
     <Link to="/sauce">
       <button type="button">SAUCE AND CHEESE</button>
     </Link>
-    <Link to="/protein">
+    <Link to="/toppings">
       <button type="button">TOPPINGS</button>
     </Link>
   </section>

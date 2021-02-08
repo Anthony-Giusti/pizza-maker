@@ -1,25 +1,28 @@
-const pizzaSizes = { sizes: ['Small (10")', 'Medium (12")', 'Large (14")', 'Extra Large (16")'] };
+const pizzaSizesData = [
+  { name: 'Small (10")', id: 'small' },
+  { name: 'Medium (12")', id: 'medium' },
+  { name: 'Large (14")', id: 'large' },
+  { name: 'Extra Large (16")', id: 'extraLarge' },
+];
 
-const pizzaStyles = {
-  styles: [
-    {
-      name: 'New York',
-      id: 'newYork',
-      description: 'Consectetur cillum nostrud elit laborum tempor aliqua incididunt laboris sit.',
-    },
-    {
-      name: 'Deep Dish',
-      id: 'deepDish',
-      description: 'Proident amet consequat laborum ad sunt ad culpa laboris cillum amet velit.',
-    },
-    {
-      name: 'Crispy Crust',
-      id: 'crispyCrust',
-      description:
-        'Ex tempor id adipisicing anim id ex anim aute cillum eiusmod nostrud ipsum incididunt.',
-    },
-  ],
-};
+const pizzaStylesData = [
+  {
+    name: 'New York',
+    id: 'newYork',
+    description: 'Consectetur cillum nostrud elit laborum tempor aliqua incididunt laboris sit.',
+  },
+  {
+    name: 'Deep Dish',
+    id: 'deepDish',
+    description: 'Proident amet consequat laborum ad sunt ad culpa laboris cillum amet velit.',
+  },
+  {
+    name: 'Crispy Crust',
+    id: 'crispyCrust',
+    description:
+      'Ex tempor id adipisicing anim id ex anim aute cillum eiusmod nostrud ipsum incididunt.',
+  },
+];
 
 const pizzaSaucesData = [
   {
@@ -50,6 +53,7 @@ const pizzaSaucesData = [
       'https://res.cloudinary.com/diby2nljo/image/upload/v1612210138/Pizza%20Maker/Pizza/Sauce/pizzaSauceRomesco.png',
     description: 'Incididunt ut excepteur quis do ex voluptate.',
   },
+  { name: 'No Sauce', id: 'noSauce', img: '' },
 ];
 
 const pizzaCheesesData = [
@@ -85,6 +89,7 @@ const pizzaToppingsData = [
   {
     name: 'Ham',
     id: 'ham',
+    type: 'protein',
     img: {
       full:
         'https://res.cloudinary.com/diby2nljo/image/upload/v1612210040/Pizza%20Maker/Pizza/Toppings/hamFull.png',
@@ -97,6 +102,7 @@ const pizzaToppingsData = [
   {
     name: 'Bacon',
     id: 'bacon',
+    type: 'protein',
     img: {
       full:
         'https://res.cloudinary.com/diby2nljo/image/upload/v1612210037/Pizza%20Maker/Pizza/Toppings/baconFull.png',
@@ -109,6 +115,7 @@ const pizzaToppingsData = [
   {
     name: 'Pepperoni',
     id: 'pepperoni',
+    type: 'protein',
     img: {
       full:
         'https://res.cloudinary.com/diby2nljo/image/upload/v1612210035/Pizza%20Maker/Pizza/Toppings/peppFull.png',
@@ -121,6 +128,7 @@ const pizzaToppingsData = [
   {
     name: 'Beyond Beef',
     id: 'beyondBeef',
+    type: 'protein',
     img: {
       full:
         'https://res.cloudinary.com/diby2nljo/image/upload/v1612210036/Pizza%20Maker/Pizza/Toppings/beefFull.png',
@@ -133,6 +141,7 @@ const pizzaToppingsData = [
   {
     name: 'Onion',
     id: 'onion',
+    type: 'veggie',
     img: {
       full:
         'https://res.cloudinary.com/diby2nljo/image/upload/v1612210040/Pizza%20Maker/Pizza/Toppings/onionFull.png',
@@ -145,6 +154,7 @@ const pizzaToppingsData = [
   {
     name: 'Green Peppers',
     id: 'greenPeppers',
+    type: 'veggie',
     img: {
       full:
         'https://res.cloudinary.com/diby2nljo/image/upload/v1612210039/Pizza%20Maker/Pizza/Toppings/greenPeppFull.png',
@@ -157,6 +167,7 @@ const pizzaToppingsData = [
   {
     name: 'Green Olives',
     id: 'greenOlives',
+    type: 'veggie',
     img: {
       full:
         'https://res.cloudinary.com/diby2nljo/image/upload/v1612210038/Pizza%20Maker/Pizza/Toppings/greenOliveFull.png',
@@ -167,8 +178,9 @@ const pizzaToppingsData = [
     },
   },
   {
-    name: 'Black Olvies',
+    name: 'Black Olives',
     id: 'blackOlives',
+    type: 'veggie',
     img: {
       full:
         'https://res.cloudinary.com/diby2nljo/image/upload/v1612210036/Pizza%20Maker/Pizza/Toppings/blackOliveFull.png',
@@ -181,6 +193,7 @@ const pizzaToppingsData = [
   {
     name: 'Pineapple',
     id: 'pineapple',
+    type: 'veggie',
     img: {
       full:
         'https://res.cloudinary.com/diby2nljo/image/upload/v1612210036/Pizza%20Maker/Pizza/Toppings/pineFull.png',
@@ -193,6 +206,7 @@ const pizzaToppingsData = [
   {
     name: 'Mushrooms',
     id: 'mushrooms',
+    type: 'veggie',
     img: {
       full:
         'https://res.cloudinary.com/diby2nljo/image/upload/v1612210038/Pizza%20Maker/Pizza/Toppings/mushFull.png',
@@ -207,4 +221,11 @@ const pizzaToppingsData = [
 const pizzaBase =
   'https://res.cloudinary.com/diby2nljo/image/upload/v1612210243/Pizza%20Maker/Pizza/pizzabase.png';
 
-export { pizzaSizes, pizzaStyles, pizzaSaucesData, pizzaCheesesData, pizzaToppingsData, pizzaBase };
+export {
+  pizzaSizesData,
+  pizzaStylesData,
+  pizzaSaucesData,
+  pizzaCheesesData,
+  pizzaToppingsData,
+  pizzaBase,
+};

@@ -1,6 +1,5 @@
 .builder_toppings {
     display: flex;
-    // flex-direction: column;
 
     & > *{
         margin: 1em;
@@ -24,7 +23,6 @@
 
             &_btn * {
                 pointer-events: none; 
-                
             }
             
             & :first-child {
@@ -37,7 +35,3 @@
         }
     }
 }
-
-// .builder_toppings > *{
-//     margin: 2em;
-// }

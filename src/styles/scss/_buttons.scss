@@ -24,6 +24,19 @@
     }
 }
 
+.btn-continue {
+    @extend %btn;
+    color: white;
+    background-color: $secondary-color;
+    border: 0.2em $primary-color solid;
+    text-shadow: 1px 1px black;
+    margin: 1.5em;
+
+    &:hover {
+        border-color:rgb(255, 255, 255);
+    }
+}
+
 .btn-primary-selected {
     border: 0.2em white solid;
 }

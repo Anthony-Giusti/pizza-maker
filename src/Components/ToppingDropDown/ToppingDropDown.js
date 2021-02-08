@@ -21,7 +21,7 @@ const ToppingDropDown = ({
     if (isOpen) {
       let target;
       for (let i = 0; i < pizza.toppings.length; i += 1) {
-        if (pizza.toppings[i].topping === formattedName) {
+        if (pizza.toppings[i].id === formattedName) {
           target = document.getElementById(`${formattedName}-${pizza.toppings[i].layout}`);
           setPizzaToppingUI(target);
         }

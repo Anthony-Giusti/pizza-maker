@@ -1,6 +1,5 @@
 @import './scss/themes';
-
-
+@import './scss/buttons';
 
 *{
     font-family: $font-primary;
@@ -12,10 +11,6 @@
 @import '../Components/Home/Home';
 @import '../Components/Base/Base';
 @import '../Components/Sauce/Sauce';
-@import '../Components/Cheese/Cheese';
 @import '../Components/Toppings/Toppings';
-@import '../Components/Veggies/Veggies';
 @import '../Components/Base/Base';
 @import '../Components/BuilderPizza/BuilderPizza';
-
-@import './scss/buttons';

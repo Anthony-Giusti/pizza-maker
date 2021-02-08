@@ -4,14 +4,13 @@ import PropTypes from 'prop-types';
 
 import ToppingDropDown from '../ToppingDropDown/ToppingDropDown';
 
-import primaryBtnVariants from '../../Data/animations';
+import { primaryBtnVariants } from '../../Data/animations';
 
 const Topping = ({
   ingredient,
   setPizzaToppings,
   setPizzaToppingLayout,
   setPizzaToppingUI,
-  formatName,
   pizza,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,11 +20,9 @@ const Topping = ({
     setIsOpen((prevCheck) => !prevCheck);
   };
 
-  const formattedName = formatName(ingredient.name);
-
   useEffect(() => {
     for (let i = 0; i < pizza.toppings.length; i += 1) {
-      if (pizza.toppings[i].topping === formattedName) {
+      if (pizza.toppings[i].id === ingredient.id) {
         setIsOpen(true);
         return;
       }
@@ -41,7 +38,7 @@ const Topping = ({
         animate={{ borderColor: isOpen ? 'rgb(255,255,255)' : '' }}
         type="button"
         className="btn-primary builder_toppings_topping_btn"
-        id={`${formattedName}-Btn`}
+        id={`${ingredient.id}-Btn`}
         onClick={handleIngrediant}
       >
         {ingredient.name}
@@ -52,7 +49,7 @@ const Topping = ({
           <ToppingDropDown
             pizza={pizza}
             isOpen={isOpen}
-            formattedName={formattedName}
+            formattedName={ingredient.id}
             setPizzaToppingLayout={setPizzaToppingLayout}
             setPizzaToppingUI={setPizzaToppingUI}
           />
@@ -67,8 +64,7 @@ Topping.propTypes = {
   setPizzaToppings: PropTypes.func.isRequired,
   setPizzaToppingLayout: PropTypes.func.isRequired,
   setPizzaToppingUI: PropTypes.func.isRequired,
-  formatName: PropTypes.func.isRequired,
-  ingredient: PropTypes.string.isRequired,
+  ingredient: PropTypes.object.isRequired,
   pizza: PropTypes.object.isRequired,
 };
 
