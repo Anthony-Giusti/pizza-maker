@@ -4,15 +4,9 @@
     min-height: 38em;
     text-align: center;
    
-    &_nav {
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 0.8em solid $primary-color;
-    }
-
     &_interface{
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
 
         > * {
             flex-basis: 50%;

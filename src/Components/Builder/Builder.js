@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Switch, Route, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { AnimatePresence } from 'framer-motion';
@@ -22,6 +22,19 @@ const Builder = ({
   setPizzaToppingUI,
 }) => {
   const location = useLocation();
+
+  useEffect(() => {
+    console.log(location);
+    const currentlocation = location.pathname.slice(1);
+    if (currentlocation === '') {
+      return;
+    }
+    console.log(currentlocation);
+    const target = document.getElementById(`builder_nav-${currentlocation}Btn`);
+    console.log(target);
+    target.classList.add('builder_nav_selected');
+    target.parentElement.classList.add('builder_nav_selected_parent');
+  }, [location]);
 
   return (
     <section className="builder">

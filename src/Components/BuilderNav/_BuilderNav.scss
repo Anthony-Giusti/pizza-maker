@@ -1,0 +1,81 @@
+.builder {
+    &_nav {
+        height: 5em;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        overflow: hidden;
+
+        a {
+            position: relative;
+            flex-basis: 25%;
+            width: auto;
+            height: 100%;
+    
+    
+            &:not(:first-child):before {
+                content: '';
+                position: absolute;
+                z-index: 3;
+                left: -5%;
+                z-index: 0;
+                display: block;
+                height: 5em;
+                width: 10em;
+                background-color: white;
+            }
+    
+            button {
+                position: relative;
+                z-index: 2;
+                border: none;
+                background-color: red;
+                background-color: rgb(255, 255, 255);
+                height: 100%;
+                width: 90%;
+            }
+        }
+    } 
+}
+
+
+// for making changes to nav
+.builder_nav_selected {
+    background-color: red !important;
+    color: white;
+
+    ::before {
+        background-color: red !important;
+    }
+}
+
+
+
+.builder_nav_selected_parent {
+    &:not(:first-child)::before {
+        background-color: red !important;
+    }
+
+    &:not(:last-child)::after{
+        content: '';
+        position: relative;      
+        z-index: 1;
+        left: 95%;
+        top: -50%;
+        display: block;
+        border-right: 5px solid red;
+        border-bottom: 5px solid red;
+        background-color: red;
+        width: 3.2em;
+        height: 3.2em;
+        transform: translate(-50%, -50%) rotate(-45deg);
+    }
+}
+
+#builder_nav-baseBtn {
+    border-radius: 1em 0 0 1em;
+}
+
+#builder_nav-orderBtn {
+    border-radius: 0 1em 1em 0;
+}

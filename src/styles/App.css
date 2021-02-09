@@ -82,6 +82,86 @@ footer {
   height: 10em;
 }
 
+.builder_nav {
+  height: 5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+}
+
+.builder_nav a {
+  position: relative;
+  -ms-flex-preferred-size: 25%;
+      flex-basis: 25%;
+  width: auto;
+  height: 100%;
+}
+
+.builder_nav a:not(:first-child):before {
+  content: '';
+  position: absolute;
+  z-index: 3;
+  left: -5%;
+  z-index: 0;
+  display: block;
+  height: 5em;
+  width: 10em;
+  background-color: white;
+}
+
+.builder_nav a button {
+  position: relative;
+  z-index: 2;
+  border: none;
+  background-color: red;
+  background-color: white;
+  height: 100%;
+  width: 90%;
+}
+
+.builder_nav_selected {
+  background-color: red !important;
+  color: white;
+}
+
+.builder_nav_selected ::before {
+  background-color: red !important;
+}
+
+.builder_nav_selected_parent:not(:first-child)::before {
+  background-color: red !important;
+}
+
+.builder_nav_selected_parent:not(:last-child)::after {
+  content: '';
+  position: relative;
+  z-index: 1;
+  left: 95%;
+  top: -50%;
+  display: block;
+  border-right: 5px solid red;
+  border-bottom: 5px solid red;
+  background-color: red;
+  width: 3.2em;
+  height: 3.2em;
+  -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+          transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+#builder_nav-baseBtn {
+  border-radius: 1em 0 0 1em;
+}
+
+#builder_nav-orderBtn {
+  border-radius: 0 1em 1em 0;
+}
+
 .builder {
   padding: 2em;
   background-color: #8e3131;
@@ -89,23 +169,12 @@ footer {
   text-align: center;
 }
 
-.builder_nav {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  border-bottom: 0.8em solid #cf5f3c;
-}
-
 .builder_interface {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 .builder_interface > * {

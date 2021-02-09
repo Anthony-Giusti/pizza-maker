@@ -14,7 +14,6 @@ import {
 
 import './styles/reset.css';
 import './styles/App.css';
-// import { element } from 'prop-types';
 
 function App() {
   const [pizza, setPizza] = useState({
