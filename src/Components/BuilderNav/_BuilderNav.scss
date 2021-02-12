@@ -4,14 +4,17 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
-        overflow: hidden;
+        pointer-events: none;
+        background-color: $secondary-color;
+        padding-top: 2em;
+        position: relative;
+        z-index: 2;
 
         a {
             position: relative;
             flex-basis: 25%;
             width: auto;
             height: 100%;
-    
     
             &:not(:first-child):before {
                 content: '';
@@ -21,13 +24,11 @@
                 z-index: 0;
                 display: block;
                 height: 5em;
-                width: 10em;
+                width: 3em;
                 background-color: white;
             }
     
             button {
-                position: relative;
-                z-index: 2;
                 border: none;
                 background-color: red;
                 background-color: rgb(255, 255, 255);
@@ -35,39 +36,43 @@
                 width: 90%;
             }
         }
+
+        &_btnText {
+            position: relative;
+            z-index: 6;
+        }
     } 
 }
 
-
 // for making changes to nav
 .builder_nav_selected {
+    z-index: 4 !important;
     background-color: red !important;
     color: white;
+    pointer-events: all;
 
     ::before {
         background-color: red !important;
     }
 }
 
-
-
 .builder_nav_selected_parent {
     &:not(:first-child)::before {
         background-color: red !important;
     }
+}
 
+.builder_nav_selected_parent-current {
     &:not(:last-child)::after{
         content: '';
-        position: relative;      
-        z-index: 1;
+        position: absolute;      
+        z-index: 3;
         left: 95%;
-        top: -50%;
+        top: 50%;
         display: block;
-        border-right: 5px solid red;
-        border-bottom: 5px solid red;
         background-color: red;
-        width: 3.2em;
-        height: 3.2em;
+        width: 3.5rem;
+        height: 3.5rem;
         transform: translate(-50%, -50%) rotate(-45deg);
     }
 }
@@ -78,4 +83,13 @@
 
 #builder_nav-orderBtn {
     border-radius: 0 1em 1em 0;
+}
+
+@media only screen and (max-width: 900px) {
+        .builder_nav a {
+            &:not(:last-child)::after{
+                content: none;
+            }
+        }
+        
 }

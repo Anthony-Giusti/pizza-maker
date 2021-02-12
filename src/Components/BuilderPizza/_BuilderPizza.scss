@@ -1,10 +1,11 @@
 .builder_pizza {
-    height: 40em;
+    min-height: 40em;
     
     &_container {
+        position: relative;
         &_widgets {
             position: absolute;
-            z-index: 2;
+            z-index: 1;
             display: flex;
             flex-direction: column;
 
@@ -43,7 +44,43 @@
         img {
             max-height: 40em;
             position: absolute;
-            right: 5em;
+            left: -17em;
+        }
+    }
+}
+
+@media only screen and (max-width: 1200px){
+    .builder_pizza {
+        padding-top: 1em;
+        
+        &_container {
+            position: relative;
+
+            img {
+                position: absolute;
+                top: 19em;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .builder_pizza{
+        padding-top: 5em;
+
+        &_container {
+            
+            &_widgets {
+                flex-wrap: wrap;
+                max-height: 30em;
+            }
+
+            img {
+                max-height: 90vw;
+                top: 15em;
+            }
         }
     }
 }

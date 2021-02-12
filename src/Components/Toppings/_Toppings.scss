@@ -1,28 +1,42 @@
-.builder_toppings {
-    display: flex;
+.builder_interface_buildOptions_toppings {
+    margin-bottom: 1.5em;
 
-    & > *{
-        margin: 1em;
+    & > span{
+        // width: 40em;
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: space-around; 
     }
 
     &_topping {
+        position: relative;
+        width: 45%;
         display: flex;
         flex-direction: column;
+        margin: 1em 0;
 
-        &_btn {
+        & button {
             position: relative;
             z-index: 2;
         }
 
         &_layout{
-            position: relative;
+            position: absolute;
             z-index: 1;
+            top: 1.9em;
+            right: 7%;
+            width: 75%;
+            display: flex;
             margin: 0 auto;
-            width: 70%;
             fill: blue;
+            
+            & button {
+                text-align: center;
 
-            &_btn * {
-                pointer-events: none; 
+                & svg {
+                    pointer-events: none; 
+                    margin: 0 auto;
+                }
             }
             
             & :first-child {
@@ -30,7 +44,7 @@
             }
 
             & :last-child {
-                border-bottom-right-radius: 0.5em;
+            border-bottom-right-radius: 0.5em;
             }
         }
     }

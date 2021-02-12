@@ -24,13 +24,16 @@
     }
 }
 
-.btn-continue {
+.btn-big {
     @extend %btn;
-    color: white;
-    background-color: $secondary-color;
-    border: 0.2em $primary-color solid;
-    text-shadow: 1px 1px black;
-    margin: 1.5em;
+    letter-spacing: 0.2em;
+    font-family: $font-title;
+    font-size: 1.4em;
+    color: rgb(255, 255, 255);
+    background-color: $primary-color;
+    border: 0.2em transparent solid;
+    text-shadow: 0.5px 0.5px black;
+    margin: 0.4em;
 
     &:hover {
         border-color:rgb(255, 255, 255);
@@ -42,7 +45,6 @@
 }
 
 .btn-secondary {
-    // @extend %btn;
     background-color: $secondary-color !important;
     border-left: 0.2em solid white  !important;
     border-right: 0.2em solid white  !important;

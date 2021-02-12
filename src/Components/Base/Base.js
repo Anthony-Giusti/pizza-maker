@@ -6,11 +6,13 @@ import { Link } from 'react-router-dom';
 import { pizzaSizesData, pizzaStylesData } from '../../Data/pizzaData';
 import { pizzaOptionsVariants, primaryBtnVariants } from '../../Data/animations';
 
-const Base = ({ pizza, setPizzaStyle, setPizzaSize }) => {
+const Base = ({ pizza, setPizzaStyle, setPizzaSize, changeLocation }) => {
+  changeLocation();
+
   const handleClick = (e) => {
     const { target } = e;
     const { children } = target.parentNode;
-    if (target.classList.contains('builder_sizes_btn')) {
+    if (target.classList.contains('builderBtnSize')) {
       setPizzaSize(e);
     } else {
       setPizzaStyle(e);
@@ -32,19 +34,19 @@ const Base = ({ pizza, setPizzaStyle, setPizzaSize }) => {
 
   return (
     <motion.section
-      className="builder_buildOptions"
+      className="builder_interface_buildOptions base"
       variants={pizzaOptionsVariants}
       initial="initial"
       animate="animate"
       exit="exit"
     >
       <h2>PICK YOUR BASE</h2>
-      <span className="builder_sizes">
+      <span className="builder_interface_buildOptions_options">
         <h3>Size:</h3>
         {pizzaSizesData.map((size) => (
           <motion.button
             type="button"
-            className="builder_sizes_btn btn-primary"
+            className="builderBtnSize btn-primary"
             id={`${size.id}-Btn`}
             key={size.id}
             onClick={handleClick}
@@ -53,13 +55,13 @@ const Base = ({ pizza, setPizzaStyle, setPizzaSize }) => {
           </motion.button>
         ))}
       </span>
-      <span className="builder_styles">
+      <span className="builder_interface_buildOptions_options">
         <h2>Style:</h2>
         {pizzaStylesData.map((style) => (
           <motion.button
             variants={primaryBtnVariants}
             type="button"
-            className="builder_styles_btn btn-primary"
+            className="builderBtnStyle btn-primary"
             id={`${style.id}-Btn`}
             key={style.id}
             onClick={handleClick}
@@ -69,18 +71,18 @@ const Base = ({ pizza, setPizzaStyle, setPizzaSize }) => {
         ))}
       </span>
       {pizza.size && pizza.style && (
-        <span className="builder_continue">
+        <span className="builder_interface_buildOptions_continue">
           <Link to="/sauce">
             <motion.button
               type="button"
-              className="builder_styles_btn btn-continue"
+              className="builderBtn btn-big"
               variants={pizzaOptionsVariants}
               whileHover="hover"
               initial="initial"
               animate="animate"
               exit="exit"
             >
-              Continue
+              CONTINUE
             </motion.button>
           </Link>
         </span>
@@ -93,6 +95,7 @@ Base.propTypes = {
   pizza: PropTypes.object.isRequired,
   setPizzaStyle: PropTypes.func.isRequired,
   setPizzaSize: PropTypes.func.isRequired,
+  changeLocation: PropTypes.func.isRequired,
 };
 
 export default Base;

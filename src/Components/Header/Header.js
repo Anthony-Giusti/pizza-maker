@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link as a } from 'react-router-dom';
 
 const Header = () => (
   <section className="header">

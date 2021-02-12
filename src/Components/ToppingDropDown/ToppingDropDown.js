@@ -36,13 +36,13 @@ const ToppingDropDown = ({
       animate={{ opacity: 1, y: -6 }}
       exit={{ opacity: 0, y: -35 }}
       transition={{ type: 'tween' }}
-      className="builder_toppings_topping_layout"
+      className="builder_interface_buildOptions_toppings_topping_layout"
     >
       <motion.button
         variants={layoutVariants}
         whileHover="whileHover"
         type="button"
-        className="builder_toppings_topping_layout_btn btn-secondary btnSelected"
+        className="builder_interface_buildOptions_toppings_topping_layout btn-secondary btnSelected"
         onClick={handleClick}
         id={`${formattedName}-full`}
       >
@@ -54,7 +54,7 @@ const ToppingDropDown = ({
         variants={layoutVariants}
         whileHover="whileHover"
         type="button"
-        className="builder_toppings_topping_layout_btn btn-secondary"
+        className="builder_interface_buildOptions_toppings_topping_layout btn-secondary"
         onClick={handleClick}
         id={`${formattedName}-right`}
       >
@@ -67,7 +67,7 @@ const ToppingDropDown = ({
         variants={layoutVariants}
         whileHover="whileHover"
         type="button"
-        className="builder_toppings_topping_layout_btn btn-secondary"
+        className="builder_interface_buildOptions_toppings_topping_layout btn-secondary"
         onClick={handleClick}
         id={`${formattedName}-left`}
       >

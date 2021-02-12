@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import Header from './Components/Header/Header';
 import Builder from './Components/Builder/Builder';
@@ -22,19 +24,67 @@ function App() {
     sauce: null,
     cheese: null,
     toppings: [],
+    progress: { complete: false, missingValues: ['Size', 'Style', 'Sauce', 'Cheese'] },
   });
-  const [buildStarted, setBuildStarted] = useState(false);
-  const [navLocation, setNavLocation] = useState();
 
-  const switchNavLocation = (location) => {
-    let x = location.pathname.substring(1);
-    if (x === '') {
-      x = 'home';
-    }
-    setNavLocation(x);
+  const [buildActive, setBuildActive] = useState(false);
+  const [navLocation, setNavLocation] = useState(useLocation.pathname);
+
+  // on loaction change//
+
+  const changeLocation = () => {
+    setNavLocation(useLocation().pathname);
   };
 
-  const startBuilding = () => setBuildStarted(true);
+  useEffect(() => {
+    const currentlocation = navLocation;
+
+    if (!currentlocation) {
+      return;
+    }
+
+    if (currentlocation !== '/order' && currentlocation !== '/' && !buildActive) {
+      setBuildActive(true);
+    }
+
+    const navNodes = document.querySelectorAll('.builder_nav')[0].childNodes;
+    let i = 0;
+
+    for (i; i < navNodes.length; i += 1) {
+      navNodes[i].classList.add('builder_nav_selected_parent');
+      navNodes[i].firstChild.classList.add('builder_nav_selected');
+
+      if (navNodes[i].href.includes(currentlocation) || currentlocation === '/') {
+        navNodes[i].classList.add('builder_nav_selected_parent-current');
+        i += 1;
+        for (i; i < navNodes.length; i += 1) {
+          navNodes[i].classList.remove('builder_nav_selected_parent');
+          navNodes[i].firstChild.classList.remove('builder_nav_selected');
+          navNodes[i].classList.remove('builder_nav_selected_parent-current');
+        }
+        return;
+      }
+      navNodes[i].classList.remove('builder_nav_selected_parent-current');
+    }
+  }, [navLocation]);
+
+  // toggle showing pizza build and reset pizza build if completed//
+
+  const changeBuildActive = (value) => {
+    setBuildActive(value);
+    if (!value) {
+      setPizza({
+        size: null,
+        style: null,
+        sauce: null,
+        cheese: null,
+        toppings: [],
+        progress: { complete: false, missingValues: ['Size', 'Style', 'Sauce', 'Cheese'] },
+      });
+    }
+  };
+
+  // for adding and removing elements from pizza//
 
   const findId = (element, id) => {
     for (let i = 0; i < element.length; i += 1) {
@@ -44,27 +94,56 @@ function App() {
     }
   };
 
-  const setPizzaStyle = (e) => {
-    const newStyleId = e.target.id.split('-')[0];
-    const style = findId(pizzaStylesData, newStyleId);
-    setPizza({ ...pizza, style: { name: style.name, id: newStyleId } });
-  };
   const setPizzaSize = (e) => {
     const newSizeId = e.target.id.split('-')[0];
     const size = findId(pizzaSizesData, newSizeId);
-    setPizza({ ...pizza, size: { name: size.name, id: newSizeId } });
+    const newMissingList = pizza.progress.missingValues.filter((value) => value !== 'Size');
+    const complete = newMissingList.length === 0;
+
+    setPizza({
+      ...pizza,
+      size: { name: size.name, id: newSizeId },
+      progress: { complete, missingValues: newMissingList },
+    });
+  };
+
+  const setPizzaStyle = (e) => {
+    const newStyleId = e.target.id.split('-')[0];
+    const style = findId(pizzaStylesData, newStyleId);
+    const newMissingList = pizza.progress.missingValues.filter((value) => value !== 'Style');
+    const complete = newMissingList.length === 0;
+
+    setPizza({
+      ...pizza,
+      style: { name: style.name, id: newStyleId },
+      progress: { complete, missingValues: newMissingList },
+    });
   };
 
   const setPizzaSauce = (e) => {
     const newSauceId = e.target.id.split('-')[0];
     const sauce = findId(pizzaSaucesData, newSauceId);
-    setPizza({ ...pizza, sauce: { name: sauce.name, id: newSauceId, img: sauce.img } });
+    const newMissingList = pizza.progress.missingValues.filter((value) => value !== 'Sauce');
+    const complete = newMissingList.length === 0;
+
+    setPizza({
+      ...pizza,
+      sauce: { name: sauce.name, id: newSauceId, img: sauce.img },
+      progress: { complete, missingValues: newMissingList },
+    });
   };
 
   const setPizzaCheese = (e) => {
     const newCheeseId = e.target.id.split('-')[0];
     const cheese = findId(pizzaCheesesData, newCheeseId);
-    setPizza({ ...pizza, cheese: { name: cheese.name, id: newCheeseId, img: cheese.img } });
+    const newMissingList = pizza.progress.missingValues.filter((value) => value !== 'Cheese');
+    const complete = newMissingList.length === 0;
+
+    setPizza({
+      ...pizza,
+      cheese: { name: cheese.name, id: newCheeseId, img: cheese.img },
+      progress: { complete, missingValues: newMissingList },
+    });
   };
 
   const setPizzaToppings = (e) => {
@@ -114,15 +193,29 @@ function App() {
     setPizzaToppingUI(e.target);
   };
 
+  // creating missing item string for last page if build incomplete //
+  const createMissingValuesString = () => {
+    const arr = pizza.progress.missingValues;
+
+    if (arr.length === 1) {
+      return `${arr[0]}`;
+    }
+    if (arr.length === 2) {
+      return `${arr[0]} and ${arr[1]}`;
+    }
+    return `${arr.slice(0, arr.length - 1).join(', ')}, and ${arr.slice(-1)}`;
+  };
+
+  //= =//
+
   return (
     <div className="App">
       <Header />
       <Builder
-        switchNavLocation={switchNavLocation}
         navLocation={navLocation}
         pizza={pizza}
-        buildStarted={buildStarted}
-        startBuilding={startBuilding}
+        buildActive={buildActive}
+        changeBuildActive={changeBuildActive}
         setPizzaStyle={setPizzaStyle}
         setPizzaSize={setPizzaSize}
         setPizzaSauce={setPizzaSauce}
@@ -130,6 +223,8 @@ function App() {
         setPizzaToppings={setPizzaToppings}
         setPizzaToppingLayout={setPizzaToppingLayout}
         setPizzaToppingUI={setPizzaToppingUI}
+        changeLocation={changeLocation}
+        createMissingValuesString={createMissingValuesString}
       />
       <Footer />
     </div>

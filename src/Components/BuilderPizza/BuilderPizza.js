@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
-import { builderWidgetVariants } from '../../Data/animations';
+import { builderWidgetVariants, pizzaBuildVariants } from '../../Data/animations';
 
 const BuilderPizza = (pizza) => {
   const [pizzaBuild, setPizzaBuild] = useState();
@@ -44,7 +44,13 @@ const BuilderPizza = (pizza) => {
   }, [pizza.pizza]);
 
   return (
-    <section className="builder_pizza">
+    <motion.section
+      className="builder_pizza"
+      variants={pizzaBuildVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <span className="builder_pizza_container">
         <span className="builder_pizza_container_widgets">
           {pizza.pizza.size && (
@@ -122,7 +128,7 @@ const BuilderPizza = (pizza) => {
             />
           ))}
       </span>
-    </section>
+    </motion.section>
   );
 };
 

@@ -6,11 +6,13 @@ import { Link } from 'react-router-dom';
 import { pizzaSaucesData, pizzaCheesesData } from '../../Data/pizzaData';
 import { pizzaOptionsVariants, primaryBtnVariants } from '../../Data/animations';
 
-const Sauce = ({ setPizzaSauce, setPizzaCheese, pizza }) => {
+const Sauce = ({ setPizzaSauce, setPizzaCheese, pizza, changeLocation }) => {
+  changeLocation();
+
   const handleClick = (e) => {
     const { target } = e;
     const { children } = target.parentNode;
-    if (target.classList.contains('builder_sauces_btn')) {
+    if (target.classList.contains('builderBtnSauce')) {
       setPizzaSauce(e);
     } else {
       setPizzaCheese(e);
@@ -33,19 +35,19 @@ const Sauce = ({ setPizzaSauce, setPizzaCheese, pizza }) => {
 
   return (
     <motion.section
-      className="sauce buildOption"
+      className="builder_interface_buildOptions"
       variants={pizzaOptionsVariants}
       initial="initial"
       animate="animate"
       exit="exit"
     >
       <h2>PICK YOUR SAUCE</h2>
-      <span className="builder_sauces">
+      <span className="builder_interface_buildOptions_options">
         {pizzaSaucesData.map((sauce) => (
           <motion.button
             variants={primaryBtnVariants}
             type="button"
-            className="builder_sauces_btn btn-primary"
+            className="builderBtnSauce btn-primary"
             id={`${sauce.id}-Btn`}
             key={sauce.id}
             onClick={handleClick}
@@ -55,12 +57,12 @@ const Sauce = ({ setPizzaSauce, setPizzaCheese, pizza }) => {
         ))}
       </span>
       <h2>PICK YOUR CHEESE</h2>
-      <span className="builder_cheeses">
+      <span className="builder_interface_buildOptions_options">
         {pizzaCheesesData.map((cheese) => (
           <motion.button
             variants={primaryBtnVariants}
             type="button"
-            className="builder_sizes_btn btn-primary"
+            className="builderBtn btn-primary"
             id={`${cheese.id}-Btn`}
             key={cheese.id}
             onClick={handleClick}
@@ -69,18 +71,34 @@ const Sauce = ({ setPizzaSauce, setPizzaCheese, pizza }) => {
           </motion.button>
         ))}
       </span>
+      <span className="builder_interface_buildOptions_back">
+        <Link to="/base">
+          <motion.button
+            type="button"
+            className="builderBtnCheese btn-big"
+            variants={pizzaOptionsVariants}
+            whileHover="hover"
+            initial="initial"
+            animate="animate"
+            exit="exit"
+          >
+            GO BACK
+          </motion.button>
+        </Link>
+      </span>
       {pizza.sauce && pizza.cheese && (
-        <span className="builder_continue">
-          <Link to="/Toppings">
+        <span className="builder_interface_buildOptions_continue">
+          <Link to="/toppings">
             <motion.button
               type="button"
-              className="builder_styles_btn btn-primary"
+              className="builderBtn btn-big"
               variants={pizzaOptionsVariants}
+              whileHover="hover"
               initial="initial"
               animate="animate"
               exit="exit"
             >
-              Continue
+              CONTINUE
             </motion.button>
           </Link>
         </span>
@@ -93,6 +111,7 @@ Sauce.propTypes = {
   setPizzaSauce: PropTypes.func.isRequired,
   setPizzaCheese: PropTypes.func.isRequired,
   pizza: PropTypes.object.isRequired,
+  changeLocation: PropTypes.func.isRequired,
 };
 
 export default Sauce;

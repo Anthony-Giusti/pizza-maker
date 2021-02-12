@@ -1,6 +1,8 @@
 .header {
     background-color: $primary-color;
     display: flex;
+    position: relative;
+    z-index: 3;
 
     img {
         height: 7em;

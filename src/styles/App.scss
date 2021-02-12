@@ -3,6 +3,7 @@
 
 *{
     font-family: $font-primary;
+    // border: 1px dotted white;
 }
 
 @import '../Components/Header/Header';
@@ -14,4 +15,5 @@
 @import '../Components/Sauce/Sauce';
 @import '../Components/Toppings/Toppings';
 @import '../Components/Base/Base';
+@import '../Components/Order/Order';
 @import '../Components/BuilderPizza/BuilderPizza';

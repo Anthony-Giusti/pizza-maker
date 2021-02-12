@@ -30,14 +30,14 @@ const Topping = ({
   }, []);
 
   return (
-    <span className="builder_toppings_topping">
+    <span className="builder_interface_buildOptions_toppings_topping">
       <motion.button
         variants={primaryBtnVariants}
         whileHover="whileHover"
         whileFocus="whileFocus"
         animate={{ borderColor: isOpen ? 'rgb(255,255,255)' : '' }}
         type="button"
-        className="btn-primary builder_toppings_topping_btn"
+        className="btn-primary builder_interface_buildOptions_toppings_btn"
         id={`${ingredient.id}-Btn`}
         onClick={handleIngrediant}
       >

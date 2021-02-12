@@ -4,9 +4,9 @@ const primaryBtnVariants = {
 };
 
 const pizzaOptionsVariants = {
-  initial: { x: -2000 },
+  initial: { x: -1000 },
   animate: { x: 0 },
-  exit: { x: 2000 },
+  exit: { x: 1800 },
   hover: {
     scale: 1.1,
     transition: {
@@ -16,10 +16,15 @@ const pizzaOptionsVariants = {
   },
 };
 
+const pizzaBuildVariants = {
+  initial: { x: 1400 },
+  animate: { x: 0 },
+  exit: { x: 1400 },
+};
+
 const builderWidgetVariants = {
   initial: { y: -1500 },
   animate: { y: 0 },
-  exit: { y: -1500 },
 };
 
-export { primaryBtnVariants, pizzaOptionsVariants, builderWidgetVariants };
+export { primaryBtnVariants, pizzaOptionsVariants, pizzaBuildVariants, builderWidgetVariants };
