@@ -11,7 +11,8 @@ const pizzaOptionsVariants = {
     scale: 1.1,
     transition: {
       duration: 0.3,
-      yoyo: Infinity,
+      repeat: Infinity,
+      repeatType: 'reverse',
     },
   },
 };

@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { pizzaSaucesData, pizzaCheesesData } from '../../Data/pizzaData';
 import { pizzaOptionsVariants, primaryBtnVariants } from '../../Data/animations';
 
 const Sauce = ({ setPizzaSauce, setPizzaCheese, pizza, changeLocation }) => {
-  changeLocation();
+  const location = useLocation().pathname;
 
   const handleClick = (e) => {
     const { target } = e;
@@ -31,6 +31,8 @@ const Sauce = ({ setPizzaSauce, setPizzaCheese, pizza, changeLocation }) => {
     if (pizza.cheese) {
       document.getElementById(`${pizza.cheese.id}-Btn`).classList.add('btn-primary-selected');
     }
+
+    changeLocation(location);
   });
 
   return (

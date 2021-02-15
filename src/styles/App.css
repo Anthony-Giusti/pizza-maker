@@ -8,7 +8,7 @@
 .btn-primary {
   color: white;
   background-color: #8e3131;
-  border: 0.2em #cf5f3c solid;
+  border: 0.2em transparent solid;
   text-shadow: 1px 1px black;
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
@@ -39,6 +39,10 @@
 
 .btn-big:hover {
   border-color: white;
+}
+
+.btn-continue {
+  position: absolute;
 }
 
 .btn-primary-selected {
@@ -76,43 +80,100 @@
   height: 7em;
 }
 
-.header h1 {
+.header_title {
+  text-align: center;
+}
+
+.header_title h1 {
   font-family: "Oswald", sans-serif;
   margin: auto;
   font-size: 5em;
 }
 
-footer {
-  background-color: #cf5f3c;
-  height: 10em;
+@media only screen and (max-width: 700px) {
+  .header img {
+    height: 12em;
+  }
 }
 
-.builder_nav {
+footer {
+  padding: 0 2em;
+  background-color: #cf5f3c;
+  color: white;
+  height: 3em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+@media only screen and (max-width: 700px) {
+  footer {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    height: 4em;
+  }
+  footer p {
+    margin: 0 auto;
+  }
+}
+
+.builder_progressBar {
   height: 5em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  pointer-events: none;
-  background-color: #8e3131;
-  padding-top: 2em;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  padding: 2em;
   position: relative;
   z-index: 2;
 }
 
-.builder_nav a {
+.builder_progressBar > :first-child {
+  border-radius: 1em 0 0 1em;
+}
+
+.builder_progressBar > :first-child > :first-child {
+  border-radius: 1em 0 0 1em;
+}
+
+.builder_progressBar > :last-child {
+  border-radius: 0 1em 1em 0;
+}
+
+.builder_progressBar span {
   position: relative;
   -ms-flex-preferred-size: 25%;
       flex-basis: 25%;
-  width: auto;
-  height: 100%;
+  background-color: white;
 }
 
-.builder_nav a:not(:first-child):before {
+.builder_progressBar span p {
+  position: relative;
+  z-index: 3;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  margin: auto;
+  width: 90%;
+}
+
+.builder_progressBar span:not(:first-child):before {
   content: '';
   position: absolute;
   z-index: 3;
@@ -124,15 +185,7 @@ footer {
   background-color: white;
 }
 
-.builder_nav a button {
-  border: none;
-  background-color: red;
-  background-color: white;
-  height: 100%;
-  width: 90%;
-}
-
-.builder_nav_btnText {
+.builder_progressBar_btnText {
   position: relative;
   z-index: 6;
 }
@@ -145,6 +198,10 @@ footer {
 }
 
 .builder_nav_selected ::before {
+  background-color: red !important;
+}
+
+.builder_nav_selected_parent {
   background-color: red !important;
 }
 
@@ -166,25 +223,15 @@ footer {
           transform: translate(-50%, -50%) rotate(-45deg);
 }
 
-#builder_nav-baseBtn {
-  border-radius: 1em 0 0 1em;
-}
-
-#builder_nav-orderBtn {
-  border-radius: 0 1em 1em 0;
-}
-
 @media only screen and (max-width: 900px) {
-  .builder_nav a:not(:last-child)::after {
+  .builder_progressBar span:not(:last-child)::after {
     content: none;
   }
 }
 
 .builder {
-  padding-bottom: 2em;
-  background-color: #8e3131;
+  background-image: url("https://res.cloudinary.com/diby2nljo/image/upload/c_scale,q_auto:eco,w_1000/v1613417516/Pizza%20Maker/269_tj8gbx.jpg");
   text-align: center;
-  min-height: 48em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -194,8 +241,12 @@ footer {
           flex-direction: column;
 }
 
-.builder_interface {
+.builder_background {
+  background-color: rgba(0, 0, 0, 0.6);
   height: 100%;
+}
+
+.builder_interface {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -207,6 +258,7 @@ footer {
 }
 
 .builder_interface_buildOptions {
+  position: relative;
   -ms-flex-preferred-size: 45%;
       flex-basis: 45%;
   -ms-flex-negative: 2;
@@ -232,6 +284,21 @@ footer {
   .builder_interface {
     display: block;
   }
+  .builder_interface_buildOptions_continue {
+    position: absolute;
+    border: 1px solid white;
+    height: 6em;
+    bottom: -6em;
+    width: 100%;
+  }
+  .builder_interface_buildOptions_continue a {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    width: 100%;
+  }
 }
 
 .builder_interface_home {
@@ -243,10 +310,11 @@ footer {
 
 .builder_interface_home_symbolContainer {
   position: relative;
-  top: 50%;
+  top: 40%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+  min-height: 30em;
 }
 
 .builder_interface_home_symbolContainer img {
@@ -265,6 +333,10 @@ footer {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+}
+
+.builder_interface_home_symbolContainer a button {
+  font-size: 2em;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -355,21 +427,29 @@ footer {
           flex-direction: column;
 }
 
-.builder_interface_buildOptions_order {
+.builder_interface_order {
   position: relative;
+  min-height: 30em;
+  margin-top: 3em;
+  width: 80%;
+  margin: 0 auto;
 }
 
-.builder_interface_buildOptions_order img {
+.builder_interface_order img {
   position: relative;
   z-index: 0;
   top: 1em;
-  max-height: 15em;
+  max-height: 20em;
 }
 
-.builder_interface_buildOptions_order a {
+.builder_interface_order a {
   position: relative;
   border-color: none;
   display: block;
+}
+
+.builder_interface_order a button {
+  font-size: 2em;
 }
 
 .builder_pizza {
@@ -434,7 +514,7 @@ footer {
 
 @media only screen and (max-width: 1200px) {
   .builder_pizza {
-    padding-top: 1em;
+    padding-top: 7em;
   }
   .builder_pizza_container {
     position: relative;
@@ -450,7 +530,8 @@ footer {
 
 @media only screen and (max-width: 700px) {
   .builder_pizza {
-    padding-top: 5em;
+    min-height: 34em;
+    padding-top: 11em;
   }
   .builder_pizza_container_widgets {
     -ms-flex-wrap: wrap;

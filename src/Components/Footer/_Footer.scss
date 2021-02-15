@@ -1,4 +1,20 @@
 footer {
+    padding: 0 2em;
     background-color: $primary-color;
-    height: 10em;
+    color: $clr-color-light;
+    height: 3em;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: 700px) {
+    footer {
+        flex-direction: column;
+        justify-content: space-around;
+        height: 4em;
+
+        p {
+            margin: 0 auto;
+        }
+    }
 }

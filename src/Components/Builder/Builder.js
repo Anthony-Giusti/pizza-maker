@@ -1,9 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Switch, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { AnimatePresence } from 'framer-motion';
 
-import BuilderNav from '../BuilderNav/BuilderNav';
+import BuilderProgressBar from '../BuilderProgressBar/BuilderProgressBar';
 import BuilderPizza from '../BuilderPizza/BuilderPizza';
 import Home from '../Home/Home';
 import Base from '../Base/Base';
@@ -26,52 +26,54 @@ const Builder = ({
   createMissingValuesString,
 }) => (
   <section className="builder">
-    <BuilderNav />
+    <section className="builder_background">
+      <BuilderProgressBar />
 
-    <section className="builder_interface">
-      <AnimatePresence exitBeforeEnter>
-        <Switch>
-          <Route path="/" exact comp={Home}>
-            <Home changeBuildActive={changeBuildActive} changeLocation={changeLocation} />
-          </Route>
-          <Route path="/base" comp={Base}>
-            <Base
-              pizza={pizza}
-              setPizzaSize={setPizzaSize}
-              setPizzaStyle={setPizzaStyle}
-              changeLocation={changeLocation}
-            />
-          </Route>
-          <Route path="/sauce" comp={Sauce}>
-            <Sauce
-              setPizzaSauce={setPizzaSauce}
-              setPizzaCheese={setPizzaCheese}
-              pizza={pizza}
-              changeLocation={changeLocation}
-            />
-          </Route>
-          <Route path="/toppings" comp={Toppings}>
-            <Toppings
-              setPizzaToppings={setPizzaToppings}
-              setPizzaToppingLayout={setPizzaToppingLayout}
-              setPizzaToppingUI={setPizzaToppingUI}
-              pizza={pizza}
-              changeLocation={changeLocation}
-              changeBuildActive={changeBuildActive}
-              createMissingValuesString={createMissingValuesString}
-            />
-          </Route>
-          <Route path="/order" comp={Order}>
-            <Order
-              changeLocation={changeLocation}
-              pizza={pizza}
-              changeBuildActive={changeBuildActive}
-            />
-          </Route>
-        </Switch>
+      <section className="builder_interface">
+        <AnimatePresence>
+          <Switch>
+            <Route path="/" exact comp={Home}>
+              <Home changeBuildActive={changeBuildActive} changeLocation={changeLocation} />
+            </Route>
+            <Route path="/base" comp={Base}>
+              <Base
+                pizza={pizza}
+                setPizzaSize={setPizzaSize}
+                setPizzaStyle={setPizzaStyle}
+                changeLocation={changeLocation}
+              />
+            </Route>
+            <Route path="/sauce" comp={Sauce}>
+              <Sauce
+                setPizzaSauce={setPizzaSauce}
+                setPizzaCheese={setPizzaCheese}
+                pizza={pizza}
+                changeLocation={changeLocation}
+              />
+            </Route>
+            <Route path="/toppings" comp={Toppings}>
+              <Toppings
+                setPizzaToppings={setPizzaToppings}
+                setPizzaToppingLayout={setPizzaToppingLayout}
+                setPizzaToppingUI={setPizzaToppingUI}
+                pizza={pizza}
+                changeLocation={changeLocation}
+                changeBuildActive={changeBuildActive}
+                createMissingValuesString={createMissingValuesString}
+              />
+            </Route>
+            <Route path="/order" comp={Order}>
+              <Order
+                changeLocation={changeLocation}
+                pizza={pizza}
+                changeBuildActive={changeBuildActive}
+              />
+            </Route>
+          </Switch>
 
-        {buildActive && <BuilderPizza pizza={pizza} />}
-      </AnimatePresence>
+          {buildActive && <BuilderPizza pizza={pizza} />}
+        </AnimatePresence>
+      </section>
     </section>
   </section>
 );

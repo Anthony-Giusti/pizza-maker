@@ -9,7 +9,7 @@
     @extend %btn;
     color: white;
     background-color: $secondary-color;
-    border: 0.2em $primary-color solid;
+    border: 0.2em transparent solid;
     text-shadow: 1px 1px black;
     transition: all .2s ease-in-out;
 
@@ -38,6 +38,10 @@
     &:hover {
         border-color:rgb(255, 255, 255);
     }
+}
+
+.btn-continue {
+    position: absolute;
 }
 
 .btn-primary-selected {

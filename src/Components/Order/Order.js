@@ -1,26 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { pizzaOptionsVariants } from '../../Data/animations';
 
 const Order = ({ changeLocation, changeBuildActive }) => {
-  changeLocation();
+  const location = useLocation().pathname;
 
   const handleClick = () => {
     changeBuildActive(false);
   };
 
+  useEffect(() => {
+    changeLocation(location);
+  });
+
   return (
     <motion.section
-      className="builder_interface_buildOptions"
+      className="builder_interface_order"
       variants={pizzaOptionsVariants}
       initial="initial"
       animate="animate"
       exit="exit"
     >
-      <span className="builder_interface_buildOptions_order">
+      <span>
         <h2>WOAH YOU'RE AWESOME</h2>
         <p>Thank you for your order! Your pizza is coming right up.</p>
         <img

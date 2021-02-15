@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+// import { useLocation } from 'react-router-dom';
 
 import Header from './Components/Header/Header';
 import Builder from './Components/Builder/Builder';
@@ -28,33 +28,36 @@ function App() {
   });
 
   const [buildActive, setBuildActive] = useState(false);
-  const [navLocation, setNavLocation] = useState(useLocation.pathname);
 
   // on loaction change//
 
-  const changeLocation = () => {
-    setNavLocation(useLocation().pathname);
-  };
+  // const changeLocation = (location) => {
+  //   setNavLocation(location);
+  // };
 
-  useEffect(() => {
-    const currentlocation = navLocation;
-
-    if (!currentlocation) {
+  const changeLocation = (x) => {
+    if (!x) {
       return;
     }
 
-    if (currentlocation !== '/order' && currentlocation !== '/' && !buildActive) {
+    const location = x.substring(1);
+
+    if (!location) {
+      return;
+    }
+
+    if (location !== 'order' && location !== '/' && !buildActive) {
       setBuildActive(true);
     }
 
-    const navNodes = document.querySelectorAll('.builder_nav')[0].childNodes;
+    const navNodes = document.querySelectorAll('.builder_progressBar')[0].childNodes;
     let i = 0;
 
     for (i; i < navNodes.length; i += 1) {
       navNodes[i].classList.add('builder_nav_selected_parent');
       navNodes[i].firstChild.classList.add('builder_nav_selected');
 
-      if (navNodes[i].href.includes(currentlocation) || currentlocation === '/') {
+      if (navNodes[i].id.includes(location) || location === '/') {
         navNodes[i].classList.add('builder_nav_selected_parent-current');
         i += 1;
         for (i; i < navNodes.length; i += 1) {
@@ -66,7 +69,43 @@ function App() {
       }
       navNodes[i].classList.remove('builder_nav_selected_parent-current');
     }
-  }, [navLocation]);
+  };
+
+  // useEffect(() => {
+  //   if (!navLocation) {
+  //     return;
+  //   }
+
+  //   const currentlocation = navLocation.substring(1);
+
+  //   if (!currentlocation) {
+  //     return;
+  //   }
+
+  //   if (currentlocation !== 'order' && currentlocation !== '/' && !buildActive) {
+  //     setBuildActive(true);
+  //   }
+
+  //   const navNodes = document.querySelectorAll('.builder_progressBar')[0].childNodes;
+  //   let i = 0;
+
+  //   for (i; i < navNodes.length; i += 1) {
+  //     navNodes[i].classList.add('builder_nav_selected_parent');
+  //     navNodes[i].firstChild.classList.add('builder_nav_selected');
+
+  //     if (navNodes[i].id.includes(currentlocation) || currentlocation === '/') {
+  //       navNodes[i].classList.add('builder_nav_selected_parent-current');
+  //       i += 1;
+  //       for (i; i < navNodes.length; i += 1) {
+  //         navNodes[i].classList.remove('builder_nav_selected_parent');
+  //         navNodes[i].firstChild.classList.remove('builder_nav_selected');
+  //         navNodes[i].classList.remove('builder_nav_selected_parent-current');
+  //       }
+  //       return;
+  //     }
+  //     navNodes[i].classList.remove('builder_nav_selected_parent-current');
+  //   }
+  // });
 
   // toggle showing pizza build and reset pizza build if completed//
 
@@ -212,7 +251,7 @@ function App() {
     <div className="App">
       <Header />
       <Builder
-        navLocation={navLocation}
+        // navLocation={navLocation}
         pizza={pizza}
         buildActive={buildActive}
         changeBuildActive={changeBuildActive}

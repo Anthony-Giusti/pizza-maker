@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import Topping from '../Topping/Topping';
 
@@ -17,12 +17,16 @@ const Toppings = ({
   changeBuildActive,
   createMissingValuesString,
 }) => {
-  changeLocation();
+  const location = useLocation().pathname;
   const missingValuesString = createMissingValuesString();
 
   const handleClick = () => {
-    changeBuildActive(true);
+    changeBuildActive(false);
   };
+
+  useEffect(() => {
+    changeLocation(location);
+  });
 
   return (
     <motion.section
@@ -73,6 +77,7 @@ const Toppings = ({
               initial="initial"
               animate="animate"
               exit="exit"
+              onClick={handleClick}
             >
               PLACE YOUR ORDER NOW
             </motion.button>

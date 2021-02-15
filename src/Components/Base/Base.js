@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { pizzaSizesData, pizzaStylesData } from '../../Data/pizzaData';
 import { pizzaOptionsVariants, primaryBtnVariants } from '../../Data/animations';
 
 const Base = ({ pizza, setPizzaStyle, setPizzaSize, changeLocation }) => {
-  changeLocation();
+  const location = useLocation().pathname;
 
   const handleClick = (e) => {
     const { target } = e;
@@ -30,6 +30,8 @@ const Base = ({ pizza, setPizzaStyle, setPizzaSize, changeLocation }) => {
     if (pizza.style) {
       document.getElementById(`${pizza.style.id}-Btn`).classList.add('btn-primary-selected');
     }
+
+    changeLocation(location);
   });
 
   return (
@@ -39,6 +41,7 @@ const Base = ({ pizza, setPizzaStyle, setPizzaSize, changeLocation }) => {
       initial="initial"
       animate="animate"
       exit="exit"
+      key="base-options"
     >
       <h2>PICK YOUR BASE</h2>
       <span className="builder_interface_buildOptions_options">

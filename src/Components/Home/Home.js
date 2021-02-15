@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 
@@ -7,7 +7,8 @@ import { pizzaOptionsVariants } from '../../Data/animations';
 
 const Home = ({ changeBuildActive, changeLocation }) => {
   const handleClick = () => changeBuildActive(true);
-  changeLocation();
+
+  changeLocation(useLocation().pathname);
 
   return (
     <motion.section
@@ -23,9 +24,6 @@ const Home = ({ changeBuildActive, changeLocation }) => {
           Tempor adipisicing fugiat officia ipsum laboris ex nostrud qui do. Minim nisi deserunt ut
           anim sunt occaecat elit anim. Commodo aliquip qui in Lorem minim. Aute magna do et
           excepteur anim minim fugiat ullamco dolor sunt labore. Aute labore esse aliqua Lorem duis.
-          In quis duis Lorem deserunt labore excepteur in labore aliquip pariatur occaecat elit
-          adipisicing laboris. Anim cupidatat pariatur aute deserunt pariatur irure. Minim cillum in
-          veniam ad.
         </p>
       </section>
       <section className="builder_interface_home_symbolContainer">

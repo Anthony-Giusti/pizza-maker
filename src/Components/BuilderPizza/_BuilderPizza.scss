@@ -51,7 +51,7 @@
 
 @media only screen and (max-width: 1200px){
     .builder_pizza {
-        padding-top: 1em;
+        padding-top: 7em;
         
         &_container {
             position: relative;
@@ -68,7 +68,8 @@
 
 @media only screen and (max-width: 700px) {
     .builder_pizza{
-        padding-top: 5em;
+        min-height: 34em;
+        padding-top: 11em;
 
         &_container {
             

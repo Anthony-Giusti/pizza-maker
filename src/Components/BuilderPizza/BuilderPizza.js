@@ -50,6 +50,7 @@ const BuilderPizza = (pizza) => {
       initial="initial"
       animate="animate"
       exit="exit"
+      key="builder-pizza"
     >
       <span className="builder_pizza_container">
         <span className="builder_pizza_container_widgets">
