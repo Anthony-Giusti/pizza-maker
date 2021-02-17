@@ -27,7 +27,7 @@ const ToppingDropDown = ({
         }
       }
     }
-  }, []);
+  });
 
   return (
     <motion.span
