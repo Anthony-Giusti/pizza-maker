@@ -14,7 +14,7 @@ This is an app I have made to practice more with React and SCSS. The goal is for
 
 ## Images Used
 
-[Logo]
+[Logo]  
 [Pizza Ingrediants]  
 [Background Image]  
 [Delivery Person]  
