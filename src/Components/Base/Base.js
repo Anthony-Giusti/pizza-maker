@@ -84,6 +84,7 @@ const Base = ({ pizza, setPizzaStyle, setPizzaSize, changeLocation }) => {
               initial="initial"
               animate="animate"
               exit="exit"
+              key="base-continueBtn"
             >
               CONTINUE
             </motion.button>

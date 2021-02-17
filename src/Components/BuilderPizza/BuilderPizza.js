@@ -61,6 +61,7 @@ const BuilderPizza = (pizza) => {
               initial="initial"
               animate="animate"
               exit="exit"
+              key="widget-size"
             >
               {pizza.pizza.size.name}
             </motion.p>
@@ -73,6 +74,7 @@ const BuilderPizza = (pizza) => {
               initial="initial"
               animate="animate"
               exit="exit"
+              key="widget-style"
             >
               {pizza.pizza.style.name}
             </motion.p>
@@ -85,6 +87,7 @@ const BuilderPizza = (pizza) => {
               initial="initial"
               animate="animate"
               exit="exit"
+              key="widget-sauce"
             >
               {pizza.pizza.sauce.name}
             </motion.p>
@@ -97,6 +100,7 @@ const BuilderPizza = (pizza) => {
               initial="initial"
               animate="animate"
               exit="exit"
+              key="widget-cheese"
             >
               {pizza.pizza.cheese.name}
             </motion.p>
@@ -110,6 +114,7 @@ const BuilderPizza = (pizza) => {
                 initial="initial"
                 animate="animate"
                 exit={{ opacity: 0 }}
+                key={`widget-${element.name}`}
               >
                 {element.name}
               </motion.p>

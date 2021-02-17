@@ -36,7 +36,6 @@ const Topping = ({
         whileHover="whileHover"
         whileFocus="whileFocus"
         animate={{ borderColor: isOpen ? 'rgb(255,255,255)' : '' }}
-        type="button"
         className="btn-primary builder_interface_buildOptions_toppings_btn"
         id={`${ingredient.id}-Btn`}
         onClick={handleIngrediant}
@@ -52,6 +51,7 @@ const Topping = ({
             formattedName={ingredient.id}
             setPizzaToppingLayout={setPizzaToppingLayout}
             setPizzaToppingUI={setPizzaToppingUI}
+            key={`${ingredient.id}-dropDown`}
           />
         )}
       </AnimatePresence>

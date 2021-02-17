@@ -32,10 +32,10 @@ const Builder = ({
       <section className="builder_interface">
         <AnimatePresence>
           <Switch>
-            <Route path="/" exact comp={Home}>
+            <Route path="/" exact comp={Home} key="interface-home">
               <Home changeBuildActive={changeBuildActive} changeLocation={changeLocation} />
             </Route>
-            <Route path="/base" comp={Base}>
+            <Route path="/base" comp={Base} key="interface-base">
               <Base
                 pizza={pizza}
                 setPizzaSize={setPizzaSize}
@@ -43,7 +43,7 @@ const Builder = ({
                 changeLocation={changeLocation}
               />
             </Route>
-            <Route path="/sauce" comp={Sauce}>
+            <Route path="/sauce" comp={Sauce} key="interface-sauce">
               <Sauce
                 setPizzaSauce={setPizzaSauce}
                 setPizzaCheese={setPizzaCheese}
@@ -51,7 +51,7 @@ const Builder = ({
                 changeLocation={changeLocation}
               />
             </Route>
-            <Route path="/toppings" comp={Toppings}>
+            <Route path="/toppings" comp={Toppings} key="interface-toppings">
               <Toppings
                 setPizzaToppings={setPizzaToppings}
                 setPizzaToppingLayout={setPizzaToppingLayout}
@@ -62,7 +62,7 @@ const Builder = ({
                 createMissingValuesString={createMissingValuesString}
               />
             </Route>
-            <Route path="/order" comp={Order}>
+            <Route path="/order" comp={Order} key="interface-order">
               <Order
                 changeLocation={changeLocation}
                 pizza={pizza}
@@ -70,9 +70,8 @@ const Builder = ({
               />
             </Route>
           </Switch>
-
-          {buildActive && <BuilderPizza pizza={pizza} />}
         </AnimatePresence>
+        {buildActive && <BuilderPizza pizza={pizza} />}
       </section>
     </section>
   </section>

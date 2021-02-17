@@ -29,12 +29,6 @@ function App() {
 
   const [buildActive, setBuildActive] = useState(false);
 
-  // on loaction change//
-
-  // const changeLocation = (location) => {
-  //   setNavLocation(location);
-  // };
-
   const changeLocation = (x) => {
     if (!x) {
       return;
@@ -70,42 +64,6 @@ function App() {
       navNodes[i].classList.remove('builder_nav_selected_parent-current');
     }
   };
-
-  // useEffect(() => {
-  //   if (!navLocation) {
-  //     return;
-  //   }
-
-  //   const currentlocation = navLocation.substring(1);
-
-  //   if (!currentlocation) {
-  //     return;
-  //   }
-
-  //   if (currentlocation !== 'order' && currentlocation !== '/' && !buildActive) {
-  //     setBuildActive(true);
-  //   }
-
-  //   const navNodes = document.querySelectorAll('.builder_progressBar')[0].childNodes;
-  //   let i = 0;
-
-  //   for (i; i < navNodes.length; i += 1) {
-  //     navNodes[i].classList.add('builder_nav_selected_parent');
-  //     navNodes[i].firstChild.classList.add('builder_nav_selected');
-
-  //     if (navNodes[i].id.includes(currentlocation) || currentlocation === '/') {
-  //       navNodes[i].classList.add('builder_nav_selected_parent-current');
-  //       i += 1;
-  //       for (i; i < navNodes.length; i += 1) {
-  //         navNodes[i].classList.remove('builder_nav_selected_parent');
-  //         navNodes[i].firstChild.classList.remove('builder_nav_selected');
-  //         navNodes[i].classList.remove('builder_nav_selected_parent-current');
-  //       }
-  //       return;
-  //     }
-  //     navNodes[i].classList.remove('builder_nav_selected_parent-current');
-  //   }
-  // });
 
   // toggle showing pizza build and reset pizza build if completed//
 

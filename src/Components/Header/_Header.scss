@@ -25,3 +25,11 @@
         }
     }
 }
+
+@media only screen and (max-width: 500px) {
+    .header {
+        img {
+            display: none;
+        }
+    }
+}

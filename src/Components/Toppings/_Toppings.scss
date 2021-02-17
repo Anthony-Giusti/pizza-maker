@@ -2,7 +2,6 @@
     margin-bottom: 1.5em;
 
     & > span{
-        // width: 40em;
         display: flex;
         flex-wrap: wrap; 
         justify-content: space-around; 
@@ -47,5 +46,27 @@
             border-bottom-right-radius: 0.5em;
             }
         }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .builder_interface_buildOptions_toppings {
+
+        & > span {
+            display: block;
+            width: 100%;
+        }
+
+        &_topping {
+            position: relative;
+            width: 100%;
+            display: block;
+            margin: 2em auto;
+
+            button {
+                width: 100%;
+            }
+        }
+        
     }
 }
