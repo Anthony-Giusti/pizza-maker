@@ -27,7 +27,7 @@ const Topping = ({
         return;
       }
     }
-  }, []);
+  }, [isOpen, ingredient.id, pizza.toppings]);
 
   return (
     <span className="builder_interface_buildOptions_toppings_topping">
