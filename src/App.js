@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from 'react';
-// import { useLocation } from 'react-router-dom';
+
 
 import Header from './Components/Header/Header';
 import Builder from './Components/Builder/Builder';
