@@ -5,10 +5,11 @@
         "es6": true,
         "node": true
     },
-    "plugins": ["react-hooks"],
+    "plugins": ["react-hooks", "import", "prettier"],
     "extends": [
         "prettier",
-        "prettier/react"
+        "prettier/react",
+        "plugin:import/warnings"
       ],
     "globals": {
         "Atomics": "readonly",
