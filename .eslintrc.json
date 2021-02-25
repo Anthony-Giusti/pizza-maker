@@ -5,7 +5,7 @@
         "es6": true,
         "node": true
     },
-    "plugins": ["react-hooks", "jsx-a11y/anchor-is-valid"],
+    "plugins": ["react-hooks"],
     "extends": [
         "prettier",
         "prettier/react"
