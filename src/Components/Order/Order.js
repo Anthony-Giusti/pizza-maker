@@ -24,13 +24,15 @@ const Order = ({ changeLocation, changeBuildActive }) => {
       animate="animate"
       exit="exit"
     >
-      <span>
+      <div>
         <h2>WOAH YOU'RE AWESOME</h2>
         <p>Thank you for your order! Your pizza is coming right up.</p>
-        <img
-          src="https://res.cloudinary.com/diby2nljo/image/upload/c_scale,q_auto:good,w_506/v1613172444/Pizza%20Maker/1658_U1RVRElPIEtBVCAzNzQtNDA_mcvlp4.png"
-          alt="pizza delivery person"
-        />
+        <div className="builder_interface_order_img-container">
+          <img
+            src="https://res.cloudinary.com/diby2nljo/image/upload/c_scale,q_auto:good,w_506/v1613172444/Pizza%20Maker/1658_U1RVRElPIEtBVCAzNzQtNDA_mcvlp4.png"
+            alt="pizza delivery person"
+          />
+        </div>
         <Link to="/">
           <motion.button
             type="button"
@@ -45,7 +47,7 @@ const Order = ({ changeLocation, changeBuildActive }) => {
             ORDER AGAIN?
           </motion.button>
         </Link>
-      </span>
+      </div>
     </motion.section>
   );
 };

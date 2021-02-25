@@ -18,9 +18,9 @@ const pizzaOptionsVariants = {
 };
 
 const pizzaBuildVariants = {
-  initial: { x: 1400 },
+  initial: { x: 1000 },
   animate: { x: 0 },
-  exit: { x: 1400 },
+  exit: { x: 1000 },
 };
 
 const builderWidgetVariants = {

@@ -33,7 +33,7 @@ const ToppingDropDown = ({
     <motion.span
       key={`${formattedName} layout`}
       initial={{ opacity: 0, y: -35 }}
-      animate={{ opacity: 1, y: -6 }}
+      animate={{ opacity: 1, y: -5 }}
       exit={{ opacity: 0, y: -35 }}
       transition={{ type: 'tween' }}
       className="builder_interface_buildOptions_toppings_topping_layout"
@@ -46,7 +46,7 @@ const ToppingDropDown = ({
         onClick={handleClick}
         id={`${formattedName}-full`}
       >
-        <svg width="20" height="20">
+        <svg width="20" height="25">
           <circle className="layout_circle" cx="10" cy="10" r="10" fill="orange" />
         </svg>
       </motion.button>

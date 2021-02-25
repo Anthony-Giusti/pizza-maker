@@ -55,16 +55,22 @@
        &_interface {
            &_home {
               &_symbolContainer {
+                 margin-top: 3em;
                  position: static;
                  min-height: auto;
                  transform: translate(0, 0);
 
                img {
-                  display: none;
+                  max-height: 12em;
+                  z-index: 1;
                }
 
                a {
-                  position: static;
+                  position: relative;
+                  top: 0;
+                  left: 0;
+                  z-index: 3;
+                  
                   button {
                      font-size: 5vw;
                   }

@@ -51,8 +51,8 @@ const BuilderPizza = (pizza) => {
       exit="exit"
       key="builder-pizza"
     >
-      <span className="builder_pizza_container">
-        <span className="builder_pizza_container_widgets">
+      <div className="builder_pizza_container">
+        <div className="builder_pizza_container_widgets">
           {pizza.pizza.size && (
             <motion.p
               className="builder_pizza_container_widgets_size"
@@ -118,7 +118,7 @@ const BuilderPizza = (pizza) => {
                 {element.name}
               </motion.p>
             ))}
-        </span>
+        </div>
         <img
           alt="base of pizza"
           src="https://res.cloudinary.com/diby2nljo/image/upload/v1612210243/Pizza%20Maker/Pizza/pizzabase.png"
@@ -132,13 +132,13 @@ const BuilderPizza = (pizza) => {
               key={`builder-${element.name}-img`}
             />
           ))}
-      </span>
+      </div>
     </motion.section>
   );
 };
 
-BuilderPizza.propTypes = {
-  pizza: PropTypes.object.isRequired,
-};
+// BuilderPizza.propTypes = {
+//   pizza: PropTypes.object.isRequired,
+// };
 
 export default BuilderPizza;
